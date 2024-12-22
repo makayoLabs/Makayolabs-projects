@@ -1,0 +1,2 @@
+2024-10-17 16:45:47,043 - ERROR - Failed to convert S:/Makayo PC/Downloads/mixkit-man-serving-the-turkey-for-his-family-24240-hd-ready.mp4: ffmpeg error (see stderr output for detail)
+2024-10-17 16:49:48,610 - ERROR - Failed to convert S:/Makayo PC/Downloads/mixkit-man-serving-the-turkey-for-his-family-24240-hd-ready.mp4: ffmpeg error (see stderr output for detail)

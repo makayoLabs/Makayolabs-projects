@@ -1,0 +1,140 @@
+Here's a complete script that implements the requested features: batch processing, support for multiple file types, error handling, logging, and a basic graphical user interface (GUI). We will tackle this step-by-step, covering:
+
+1. **Batch Processing for Conversion Tasks**  
+2. **Support for Different Media File Types**  
+3. **Error Handling and Logging**  
+4. **Adding a Basic GUI Using `tkinter`**
+
+### Complete Script for Media Conversion
+
+```python
+import os
+import ffmpeg
+import logging
+from pathlib import Path
+from datetime import datetime
+import tkinter as tk
+from tkinter import filedialog, messagebox
+
+# Folder paths
+INPUT_DIR = Path("F:/media_toolkit/input_files")
+OUTPUT_DIR = Path("F:/media_toolkit/output_files")
+LOG_DIR = Path("F:/media_toolkit/logs/conversion")
+TEMP_DIR = Path("F:/media_toolkit/temp")
+
+# Supported formats
+SUPPORTED_VIDEO_FORMATS = [".mp4", ".avi", ".mov"]
+SUPPORTED_AUDIO_FORMATS = [".mp3", ".wav", ".aac"]
+
+# Setup logging
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+logging.basicConfig(
+    filename=LOG_DIR / f"conversion_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+def convert_media(input_file, output_file):
+    """
+    Convert media files using ffmpeg.
+    """
+    try:
+        # Perform conversion
+        ffmpeg.input(str(input_file)).output(str(output_file)).run(overwrite_output=True)
+        logging.info(f"Successfully converted {input_file} to {output_file}.")
+        print(f"Successfully converted {input_file} to {output_file}.")
+    except Exception as e:
+        logging.error(f"Failed to convert {input_file}: {e}")
+        print(f"Failed to convert {input_file}: {e}")
+
+def process_files(input_folder, output_folder, file_types):
+    """
+    Process all files in the given folder with the specified types.
+    """
+    for file in input_folder.rglob("*"):
+        if file.suffix.lower() in file_types:
+            # Define output file path
+            output_subfolder = output_folder / file.suffix.lstrip(".")
+            output_subfolder.mkdir(parents=True, exist_ok=True)
+            output_file = output_subfolder / f"{file.stem}_converted{file.suffix}"
+            
+            # Perform the conversion
+            convert_media(file, output_file)
+
+def run_batch_conversion():
+    """
+    Run batch processing for audio and video files.
+    """
+    process_files(INPUT_DIR / "audio", OUTPUT_DIR / "audio", SUPPORTED_AUDIO_FORMATS)
+    process_files(INPUT_DIR / "video", OUTPUT_DIR / "video", SUPPORTED_VIDEO_FORMATS)
+    messagebox.showinfo("Batch Conversion Complete", "All files have been processed.")
+
+def browse_input_directory():
+    """
+    Open a dialog to browse for the input directory.
+    """
+    dir_path = filedialog.askdirectory(initialdir=INPUT_DIR)
+    if dir_path:
+        input_dir_var.set(dir_path)
+
+def browse_output_directory():
+    """
+    Open a dialog to browse for the output directory.
+    """
+    dir_path = filedialog.askdirectory(initialdir=OUTPUT_DIR)
+    if dir_path:
+        output_dir_var.set(dir_path)
+
+# Tkinter GUI setup
+app = tk.Tk()
+app.title("Media Toolkit - Batch Media Converter")
+app.geometry("500x300")
+
+input_dir_var = tk.StringVar(value=str(INPUT_DIR))
+output_dir_var = tk.StringVar(value=str(OUTPUT_DIR))
+
+# Input directory selection
+tk.Label(app, text="Input Directory:").pack(pady=5)
+tk.Entry(app, textvariable=input_dir_var, width=50).pack(pady=5)
+tk.Button(app, text="Browse", command=browse_input_directory).pack(pady=5)
+
+# Output directory selection
+tk.Label(app, text="Output Directory:").pack(pady=5)
+tk.Entry(app, textvariable=output_dir_var, width=50).pack(pady=5)
+tk.Button(app, text="Browse", command=browse_output_directory).pack(pady=5)
+
+# Start batch conversion button
+tk.Button(app, text="Start Batch Conversion", command=run_batch_conversion, bg="green", fg="white").pack(pady=20)
+
+# Start the Tkinter event loop
+app.mainloop()
+```
+
+### Explanation of the Script
+
+1. **Batch Processing**:
+   - The script scans the `input_files/audio` and `input_files/video` folders for all supported file types and processes each file.
+   - Converted files are saved in corresponding folders within the `output_files` directory.
+
+2. **File Type Support**:
+   - The script supports common audio and video file formats defined by `SUPPORTED_VIDEO_FORMATS` and `SUPPORTED_AUDIO_FORMATS`.
+
+3. **Error Handling and Logging**:
+   - Errors during conversion are logged in a log file within `logs/conversion`. Each log file is timestamped for easy tracking.
+
+4. **Graphical User Interface (GUI)**:
+   - The `tkinter` library is used to create a basic GUI for selecting the input/output directories and starting the batch conversion.
+   - The GUI can be easily expanded with more features, such as adding file previews or advanced conversion options.
+
+### Folder Structure Updates
+
+The script aligns with the folder structure you've established, making it scalable for future expansion (e.g., more conversion types, automation, or ML-based features). Any future updates to the script can extend the processing functions to handle new file types or integrate additional tools.
+
+### Next Steps
+
+Now that the script and folder structure are set, you could:
+- Add advanced features (e.g., video editing, metadata management).
+- Enhance the GUI with more options (e.g., drag-and-drop files, progress bars).
+- Set up the `cloud_storage` scripts to upload the processed files automatically to Google Drive.
+
+This script provides a solid foundation to build upon and can easily accommodate further enhancements.

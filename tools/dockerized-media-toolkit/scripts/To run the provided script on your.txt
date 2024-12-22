@@ -1,0 +1,51 @@
+To run the provided script on your Windows system, follow these steps:
+
+### 1. Prerequisites
+
+- **Python**: Make sure Python is installed on your system. You can download it from [python.org](https://www.python.org/downloads/). If it's already installed, ensure the `python` command is available in the Command Prompt.
+- **FFmpeg**: You have already set up FFmpeg correctly on your system. If not, double-check that it is accessible from the command line by running `ffmpeg -version`.
+
+### 2. Install Required Python Packages
+
+Open a Command Prompt and install the necessary Python packages using `pip`:
+
+```bash
+pip install ffmpeg-python tkinter
+```
+
+### 3. Set Up the Folder Structure
+
+Make sure the folder structure provided is created on your `F:` drive. You can create it manually or use a script to set it up.
+
+### 4. Save the Script
+
+- Copy the script provided earlier and save it as `convert_media.py` in the `F:\media_toolkit\scripts` directory.
+
+### 5. Running the Script
+
+To run the script, open a Command Prompt and navigate to the script's location:
+
+```bash
+cd F:\media_toolkit\scripts
+```
+
+Then, run the script with:
+
+```bash
+python convert_media.py
+```
+
+### 6. Using the GUI
+
+Once the script is running, a graphical user interface will appear:
+- Use the "Browse" buttons to select the input and output directories. The defaults are set to the `F:\media_toolkit\input_files` and `F:\media_toolkit\output_files` directories.
+- Click "Start Batch Conversion" to begin processing the files.
+
+The script will log conversion results in the `F:\media_toolkit\logs\conversion` directory, and the converted files will be saved in the appropriate folders under `F:\media_toolkit\output_files`.
+
+### 7. Troubleshooting
+
+- If any Python module is missing, install it using `pip install <module_name>`.
+- Make sure FFmpeg is properly installed and configured on your system path.
+
+Now, you can expand on this script by adding new features, enhancing the GUI, or automating other tasks like cloud uploading!

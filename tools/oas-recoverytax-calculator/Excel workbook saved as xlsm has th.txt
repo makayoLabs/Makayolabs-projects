@@ -1,0 +1,103 @@
+Excel workbook saved as xlsm has the following sheets
+	workbooks
+	agentinfo
+	programinfo
+	elcs
+	
+Workbooks sheet has 5 columns with headers in row 1 of each column, the column are as follows
+	A =ref
+	B =Work Book 
+	C =Folder Path
+	D =Current workbook path
+	E =Last Used Workbook path
+On this worksheet there is a button that uses vba to update the file paths this has already been coded and this worksheet and the code works no help needed here. I provided the structure of this sheet because the closed workbook file path will be in workbooks!D2.
+
+I want to pull from that closed workbook information that will populate into the sheet called agentinfo. Agentinfo has the following columns
+	A =ref is numbered column to keep track of the inputs
+	B =Agent info header of the information in column C
+	C =values for the agent info pulled from the closed workbook 
+The rows of the columns are as follows:
+Ref	Agentinfo	C column
+1	Name		Value
+3	Agent ID	Value
+4	User ID		Value
+5	Phone Number	Value
+6	Email		Value
+7	Team Name	Value
+8	TL ID		Value
+9	TL Email	Value
+10	TL Phone Number	Value
+11	Manager		Value
+
+
+you provided this code to pull the information from the closed workbook
+
+Function LookupFromClosedWorkbook(filePath As String, sheetName As String, lookupValue As String, searchColumn As String, returnColumns As Variant) As Variant
+    Dim cn As Object
+    Dim rs As Object
+    Dim query As String
+    Dim returnColumnList As String
+    Dim result As Variant
+
+    ' Set up the ADO connection to the closed workbook
+    Set cn = CreateObject("ADODB.Connection")
+    Set rs = CreateObject("ADODB.Recordset")
+
+    ' Build the comma-separated list of return columns
+    returnColumnList = Join(returnColumns, "], [") ' Convert array to a comma-separated string
+    
+    ' SQL Query to get data from the closed workbook
+    query = "SELECT [" & returnColumnList & "] FROM [" & sheetName & "$] WHERE [" & searchColumn & "] = '" & lookupValue & "'"
+
+    ' Open connection to the closed workbook (Excel file)
+    cn.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & filePath & ";Extended Properties=""Excel 12.0;HDR=YES;IMEX=1"";"
+
+    ' Execute the SQL query
+    rs.Open query, cn
+
+    ' If records are found, load the data into an array
+    If Not rs.EOF Then
+        ' Store the result in an array
+        result = rs.GetRows()
+    Else
+        result = CVErr(xlErrNA) ' If no data is found, return an error
+    End If
+
+    ' Clean up
+    rs.Close
+    cn.Close
+    Set rs = Nothing
+    Set cn = Nothing
+
+    ' Return the result
+    LookupFromClosedWorkbook = result
+End Function
+  
+
+this code is saved in module 2 of my excel workbook. the closed workbook whose file path is in workbooks!D2, workbooks is a sheet in my excel file D2 is the cell the file path is in. from the closed excel files the sheet that we are always working with is called MASTER and the columns that i want to pull are as follows:
+	A =employee name
+	C =user id
+	D =level
+	E =tenure
+	F =phone #
+	G =team name
+	H =team leader
+	I =manager
+
+in my excel file in the sheet names agentinfo my first lookupvalue will be cell C5 to retrieve the following information
+                                        
+	from the closed workbook from sheet called Master and column A =employee name mapped to sheet agentinfo cell C2
+	from the closed workbook from sheet called Master and column G =team name     mapped to sheet agentinfo cell C8
+	from the closed workbook from sheet called Master and column H =team leader   mapped to sheet agentinfo cell C9
+	from the closed workbook from sheet called Master and column I =manager       mapped to sheet agentinfo cell C13
+
+
+in my excel file in the sheet names agentinfo my second lookupvalue will be cell C9 to retrieve the following information
+
+	from the closed workbook from sheet called Master and column C =user id       mapped to sheet agentinfo cell C10
+	from the closed workbook from sheet called Master and column F =phone #       mapped to sheet agentinfo cell C12
+
+
+
+
+

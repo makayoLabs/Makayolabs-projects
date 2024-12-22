@@ -1,0 +1,13 @@
+the media toolkit script. This script features a single user interface that dynamically updates based on user selections. It provides users with the ability to upload a file from their local directory or enter a URL, then determines the media type and prompts the user to choose the processes they want to perform (conversion, transcription, or upload/save). Depending on the selection, additional options are presented:
+
+Conversion: Allows users to select an output format from a dropdown menu.
+Transcription: Provides checkbox options for different output types (SRT, captions, or text transcription).
+Upload/Save: Offers options to upload to Google Drive, create an email link, or save locally.
+The script is designed to be interactive and user-friendly, with only the relevant fields displayed based on the user's choices. ensure that the media toolkit saves files properly, the script needs to be adjusted to handle different save options based on the user's choices. Here’s an example of how the script can be structured to fix this: please full script
+
+File Saving Functionality:
+
+If the user selects "Save to Local Directory," prompt the user to choose a local save path using a file dialog.
+If "Upload to Google Drive" is selected, use the Google Drive API to handle file uploads.
+If "Generate Email Link" is chosen, upload the file to a cloud service and generate a shareable link.
+

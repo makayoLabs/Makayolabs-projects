@@ -1,0 +1,108 @@
+### **Project Scope: OAS Recovery Tax Calculation Tool**
+
+#### **1. Overview**
+This project involves creating a dynamic Excel tool for calculating the Old Age Security (OAS) recovery tax, specifically for individuals aged 65 to 70. The tool will help users determine if they are subject to the OAS recovery tax, the amount they need to repay, and provide suggestions on how to minimize this repayment by adjusting various financial variables.
+
+The system will be designed to allow for future updates, pulling real-time data from the Canada Revenue Agency (CRA) API, calculating recovery tax, and providing a user-friendly interface for adjustments.
+
+---
+
+#### **2. Key Features**
+
+##### **Core Functionality:**
+- **Recovery Tax Calculation:**
+  - **OAS Recovery Tax**: Automatically calculates whether users owe the OAS recovery tax based on their net income and the threshold for the selected year.
+  - **Net OAS Calculation**: Calculates the net OAS amount after applying the clawback.
+  - **Thresholds and Rates**: Displays the threshold and clawback rate based on the selected year.
+
+- **Scenario Simulation:**
+  - Allows users to adjust variables such as **RRSP contributions**, **spousal income**, and **OAS delay benefits**.
+  - Shows how these adjustments can impact the recovery tax owed and net OAS retained.
+  
+##### **Educational Guidance:**
+- **OAS Clawback Explanation**: Provides a detailed explanation of how the clawback process works, the thresholds, and the annual changes in the threshold amounts.
+- **Age-Specific Advice**: Provides guidance for those between ages 65 and 70, focusing on the pros and cons of deferring OAS and other options for minimizing recovery tax.
+
+##### **Dynamic Variables:**
+- **Automatic Updates**: Incorporate data fetched from the CRA API for updated clawback thresholds and rates.
+- **User Inputs**: Users can input their income, OAS benefits, and make adjustments for RRSP, spousal income, and OAS delay.
+
+##### **User Interface:**
+- **Interactive Design**: Easy-to-navigate design with clear labels and color-coded inputs/outputs.
+- **Dropdown Menus**: For year selection, spousal income splitting, and other options.
+- **Automated Calculations**: Real-time calculation updates based on the user’s inputs.
+
+##### **Output and Reports:**
+- **Summary of Results**: Display the recovery tax owed, the net OAS retained after clawback, and suggestions for minimizing recovery tax.
+- **Printable Reports**: Generate a printable report summarizing the inputs, recovery tax, and suggested strategies.
+
+---
+
+#### **3. Detailed Layout**
+
+##### **Tab 1: Inputs & Results**
+- **Inputs**: Fields for entering user data (OAS benefits, net income, RRSP contributions, spousal income, etc.).
+- **Clawback Details**: Displays the current threshold for the selected year, the clawback rate, and phaseout range.
+- **Results**: Shows recovery tax owed, net OAS after clawback, and an indication if the clawback can be avoided.
+
+##### **Tab 2: Scenarios**
+- **Adjustable Inputs**: Fields or sliders for adjusting RRSP contributions, spousal income, and delay age of OAS.
+- **Dynamic Outputs**: Real-time recalculations of the recovery tax and net OAS based on user inputs.
+- **Comparison**: Displays a side-by-side comparison of the original vs. adjusted scenario to help users make informed decisions.
+
+##### **Tab 3: Guidance**
+- **Threshold Information**: Explains the clawback threshold and its annual updates.
+- **Minimization Tips**: Suggestions for strategies to reduce net income and avoid or minimize the clawback (e.g., RRSP contributions, pension splitting).
+- **Age-Specific Information**: Guidance for individuals aged 65 to 70 on the benefits of delaying OAS.
+
+##### **Tab 4: Reports**
+- **Printable Report**: Allows the user to generate a summary report with details about the recovery tax owed, net OAS retained, and recommendations.
+- **Custom Notes**: Space for the user to add personal notes related to their financial situation or planning.
+
+---
+
+#### **4. Technical Requirements**
+
+##### **Core Functionality**:
+- **Formulas**:
+  - **Recovery Tax**: \(\text{Recovery Tax} = \min(\text{OAS Benefits}, (\text{Net Income} - \text{Threshold}) \times \text{Clawback Rate})\)
+  - **Net OAS After Clawback**: \(\text{Net OAS} = \text{OAS Benefits} - \text{Recovery Tax}\)
+  - **Adjusted Income After RRSP**: \(\text{Adjusted Income} = \text{Net Income} - \text{RRSP Contributions}\)
+
+- **API Integration**: 
+  - Fetch the **threshold** data and other relevant tax information directly from the CRA API (or another reliable data source).
+  - Update threshold data dynamically based on the selected year.
+
+##### **Advanced Features**:
+- **Dynamic Year Threshold**: Allow the user to select the year and pull the threshold data using the CRA API (or other reliable source).
+- **Scenario Simulation**: Provide adjustable fields for RRSP contributions, spousal income, and delay age of OAS to simulate various scenarios.
+- **Real-time Calculations**: Automatically update the results when any input is changed.
+
+##### **User Interface**:
+- **Interactive Fields**: Dropdown menus and text inputs for selecting the year, adjusting financial variables, and inputting data.
+- **Real-time Updates**: Outputs update in real-time based on user input.
+
+##### **Export/Reporting**:
+- **Generate Report**: Users can click a button to generate a printable summary of their recovery tax and suggested strategies.
+
+---
+
+#### **5. Deliverables**
+- **Excel File**: An Excel workbook with the necessary tabs, formulas, and user interface elements.
+- **Python Script (Optional)**: A Python script that pulls real-time threshold data from the CRA API and updates the Excel file.
+
+---
+
+#### **6. Timeline**
+- **Week 1**: Research and gather necessary data from the CRA API or relevant source.
+- **Week 2**: Build Excel file with all required calculations, formulas, and tabs.
+- **Week 3**: Implement scenario simulation, real-time calculations, and export functionality.
+- **Week 4**: Add advanced features such as dynamic year threshold updates, reporting, and final testing.
+
+---
+
+#### **7. Testing and Refinement**
+- **User Testing**: Allow a group of users to test the Excel tool to ensure it meets their needs.
+- **Refinement**: Make adjustments based on user feedback to improve usability and functionality.
+
+This scope covers the full design and functionality of the OAS recovery tax calculation tool, including dynamic data integration, scenario simulation, and educational guidance for users. Let me know if you'd like any adjustments to this!

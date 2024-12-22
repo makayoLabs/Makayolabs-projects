@@ -1,0 +1,37 @@
+i have an excel workbook called WorkInfo.xlsm
+in it i have a work sheet called workbooks in workbooks sheet has these columns
+	A = Ref
+	B = Work Book
+	C = Folder Path
+	D = Current WorkBook Path
+	E = Last Used WorkBook Path
+
+Column A Ref is a reference column
+
+Column B is the title of the workbooks
+
+Column C is the path to the folder where the workbooks may be located in
+
+Column D is where i want to populate with the current work book path that is found in the folder
+
+Column E is where i want the last used current work book to be moved to when a new current work book is found in the folder
+
+The row for this sheet are as follows 
+
+Row 1 is the Column headers "Ref" "WorkBook" "Folder Path" "Current WorkBook Path" "Lst Used Current WorkBook Path" 
+Row 2 (Org Chart): The file naming convention is "Org Chart Month Day, Year.xlsx".
+Row 3 (RO Schedule): The file naming convention is "Month Year RO Schedule.xlsx".
+Row 4 (Queue Split Calculator): The file naming convention is "Queue Split Calculator for Week Ending Month Abbreviation Day Year" (e.g., "Queue Split Calculator for Week Ending Nov 22 2024").
+
+I want row to remain as headers
+For row 2 the folder path is in cell c2, i want to open that folder, then in that folder look for the most recent year (i.e. 2024), once found then opens that folder then looks for the most recent month (i.e November) with a folder naming structure such as (i.e. 11. November), then opens that folder and looks for the most recent file with the naming convention "Org Chart Month Day, Year" (i.e. Org Chart November 25, 2024) the file will always the one with the most recent date modified following that naming convention. I want to pull this file path into d2, then when the routine runs again the file path would be moved into e2 when a new file is put into d2.
+
+Example you run the function it find the file path in the folder placed the path in cell d2 for example the  file name "Org Chart November 25 will be replaced next week with a new file "Org Chart December 2, 2024" this file can be added at anytime in the week, when it is added the path to the "Org Chart November 25, 2024 will be moved into the e2 cell when i run the function
+
+For row 3 the folder path is in c3 i want to open that folder then in that folder look for the most recent year (i.e. 2024) then look for the file with the currents month in the title (i.e November 2024 RO Schedule) the file will always be named with the convention Month Year RO Schedule and the most recent date modified with that naming convention, and the month matched the current month. I want to pull this file path into d3, then when the routine runs again the file path would be moved into e3 when a new file is put into d3.
+
+Example you run the function it find the file path in the folder placed the path in cell d3 for example the  file name "November 2024 RO Schedule" will be replaced next month with a new file "December 2024 RO Schedule" this file can be added at anytime in the month, however i dont want to pull December 2024 RO Schedule until it is actually December in the calendar, until the current month matches the month in the file name, if it matches then the November 2024 Ro SChedule goes to cell e3 and the December 2024 RO SChedule goes to d3
+
+For row 4 the folder path is in c4 i want to open that folder then look for a file with the naming convention "Queue Split Calculator for Week Ending Nov 22 2024. the month will always be abbreviated to three letter i.e NOV there is no comma after the day then followed by the year. the file path that i want to pull will always be last Fridays file and the most recent modified of that file. I.e int he folder there is currently a file called  "Queue Split Calculator for Week Ending Nov 22 2024." thisis the file path that i want to pull into cell d4 and then when the next weeks file is create i want to pull the file that is named "Queue Split Calculator for Week Ending Nov 29 2024. it is always the last week Fridays file.
+
+I also want the ability to add more rows with different folderas and naming structure in the future 
